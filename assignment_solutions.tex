@@ -1,0 +1,172 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+\begin{center}
+{\LARGE \textbf{Area Computation Assignment Solutions}}\\
+\end{center}
+
+\section*{Question 1}
+\textbf{Question image (upload full image, not cropped):}
+\begin{center}
+    \includegraphics[width=0.9\textwidth]{question1.png}
+\end{center}
+
+\textbf{Systematic solution}
+
+From the figure, use the following read-off data:
+\begin{itemize}
+    \item $A(503.42,1710.48)$, $F(580.62,1750.60)$.
+    \item $AC=102$.
+    \item $CD=88.82$ at about $26^\circ$ above $AC$.
+    \item $ED=EF$.
+    \item Curved boundary $FE$ is a semicircle of radius $50$ m (marked $R50$), hence $FE=100$ m.
+\end{itemize}
+
+\textbf{Step 1: Coordinates of $C$ and $D$}
+\[
+C=(503.42+102,\ 1710.48)=(605.42,\ 1710.48)
+\]
+\[
+D=\Big(605.42+88.82\cos 26^\circ,\ 1710.48+88.82\sin 26^\circ\Big)
+=(685.251,\ 1749.416)
+\]
+
+\textbf{Step 2: Locate $E$ from $ED=EF=100$}
+
+So $E$ is the upper intersection of two circles:
+\[
+\text{center }F,\ r=100 \quad\text{and}\quad \text{center }D,\ r=100.
+\]
+This gives approximately:
+\[
+E\approx(633.900,\ 1835.224).
+\]
+
+\textbf{Step 3: Area of polygon $AFEDC$ (shoelace)}
+
+Using points in order
+\[
+A(503.42,1710.48),\ F(580.62,1750.60),\ E(633.900,1835.224),\ D(685.251,1749.416),\ C(605.42,1710.48),
+\]
+shoelace gives
+\[
+A_{AFEDC}=8589.03\ \text{m}^2.
+\]
+
+\textbf{Step 4: Add the semicircular bulge on $FE$}
+\[
+A_{\text{semi}}=\frac{1}{2}\pi r^2=\frac{1}{2}\pi(50)^2=3926.99\ \text{m}^2.
+\]
+
+\textbf{Total shaded area}
+\[
+A_{\text{shaded}}=A_{AFEDC}+A_{\text{semi}}
+=8589.03+3926.99
+=12516.02\ \text{m}^2.
+\]
+\[
+\boxed{A_{\text{shaded}}\approx 1.252\times 10^4\ \text{m}^2}
+\]
+
+\hrule
+\section*{Question 2}
+\textbf{Question image (upload full image, not cropped):}
+\begin{center}
+    \includegraphics[width=0.9\textwidth]{question2.png}
+\end{center}
+
+Offsets at spacing $d=15$ m:
+\[
+3.50,\ 4.30,\ 6.75,\ 5.25,\ 7.50,\ 8.80,\ 7.90,\ 6.40,\ 4.40,\ 3.25
+\]
+Let these be $y_1,\ldots,y_{10}$.
+
+\subsection*{(a) Trapezoidal rule}
+\[
+A_T=d\left[\frac{y_1+y_{10}}{2}+\sum_{i=2}^{9}y_i\right]
+\]
+\[
+\sum_{i=2}^{9}y_i=4.30+6.75+5.25+7.50+8.80+7.90+6.40+4.40=51.30
+\]
+\[
+\frac{y_1+y_{10}}{2}=\frac{3.50+3.25}{2}=3.375
+\]
+\[
+A_T=15(51.30+3.375)=15(54.675)=820.125\ \text{m}^2
+\]
+\[
+\boxed{A_T\approx 820.13\ \text{m}^2}
+\]
+
+\subsection*{(b) Simpson's estimate}
+There are $10$ offsets $\Rightarrow 9$ intervals (odd), so pure Simpson's $\frac13$ rule is not directly applicable over the full length.
+Use Simpson's $\frac13$ on first $8$ intervals ($y_1$ to $y_9$) and trapezoid on last interval ($y_9$ to $y_{10}$).
+
+\[
+A_{S,1}=\frac{d}{3}\left[(y_1+y_9)+4(y_2+y_4+y_6+y_8)+2(y_3+y_5+y_7)\right]
+\]
+\[
+A_{S,1}=\frac{15}{3}\left[(3.50+4.40)+4(4.30+5.25+8.80+6.40)+2(6.75+7.50+7.90)\right]
+\]
+\[
+A_{S,1}=5(151.20)=756.00\ \text{m}^2
+\]
+Last strip:
+\[
+A_{\text{last trap}}=\frac{15}{2}(4.40+3.25)=57.375\ \text{m}^2
+\]
+Hence
+\[
+A_S=756.00+57.375=813.375\ \text{m}^2
+\]
+\[
+\boxed{A_S\approx 813.38\ \text{m}^2}
+\]
+
+\hrule
+\section*{Question 3}
+\textbf{Question image (upload full image, not cropped):}
+\begin{center}
+    \includegraphics[width=0.9\textwidth]{question3.png}
+\end{center}
+
+\textbf{Simpson's-rule-only treatment (mixed $\frac13$ and $\frac38$)}
+
+Because there are $9$ intervals, a standard approach is:
+\begin{itemize}
+    \item Simpson's $\frac13$ on first $6$ intervals ($y_1$ to $y_7$),
+    \item Simpson's $\frac38$ on last $3$ intervals ($y_7$ to $y_{10}$).
+\end{itemize}
+
+First part:
+\[
+A_{\frac13}=\frac{d}{3}\left[(y_1+y_7)+4(y_2+y_4+y_6)+2(y_3+y_5)\right]
+\]
+\[
+A_{\frac13}=5\left[(3.50+7.90)+4(4.30+5.25+8.80)+2(6.75+7.50)\right]=566.50\ \text{m}^2
+\]
+
+Second part:
+\[
+A_{\frac38}=\frac{3d}{8}\left[(y_7+y_{10})+3(y_8+y_9)\right]
+\]
+\[
+A_{\frac38}=\frac{45}{8}\left[(7.90+3.25)+3(6.40+4.40)\right]=244.97\ \text{m}^2
+\]
+
+Total:
+\[
+A=566.50+244.97=811.47\ \text{m}^2
+\]
+\[
+\boxed{A\approx 811.47\ \text{m}^2}
+\]
+
+\end{document}
